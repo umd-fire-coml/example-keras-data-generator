@@ -15,9 +15,6 @@ class DataGenerator(Sequence):
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
         self.on_epoch_end()
-        # do not store your dataset like this when
-
-
 
     def __len__(self):
         """Denotes the number of batches per epoch
