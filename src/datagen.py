@@ -15,22 +15,33 @@ class DataGenerator(Sequence):
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
         self.on_epoch_end()
+        # do not store your dataset like this when
+
 
 
     def __len__(self):
         """Denotes the number of batches per epoch
         :return: number of batches per epoch
         """
-        return int(np.floor(n_items / self.batch_size))
+        return int(np.floor(n_dataset_items / self.batch_size))
 
     def __getitem__(self, index):
         """Generate one batch of data
         :param index: index of the batch
-        :return: X and y when fitting. X only when predicting
+        :return: x_batch and y_batch
         """
+        # Initialization
+        x_batch = np.empty((self.batch_size, *self.x_shape))
+        y_batch = np.empty((self.batch_size, *self.y_shape))
+
+        # Generate indexes of the batch
+        indexes = self.indexes[index * self.batch_size : (index + 1) * self.batch_size]
+
+
 
 
     def on_epoch_end(self):
         """Shuffle indexes after each epoch
         """
         np.random.shuffle(self.indexes)
+
