@@ -34,6 +34,7 @@ class DataGenerator(Sequence):
         # Generate indexes of the batch
         indexes = self.indexes[index * self.batch_size : (index + 1) * self.batch_size]
 
+        # Return batch data
 
 
 
