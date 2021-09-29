@@ -1,4 +1,4 @@
-from src.datagen import DataGenerator
+from src.datagen.py import DataGenerator
 import numpy as np
 import pytest
 

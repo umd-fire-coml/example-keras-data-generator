@@ -1,20 +1,23 @@
 import numpy as np
+import os
 from tensorflow.keras.utils import Sequence
 
 class DataGenerator(Sequence):
     '''this is a random data generator, edit this data generator to read data from dataset folder and return a batch with __getitem__'''
 
-    def __init__(self, batch_size=8, x_shape=(256, 256, 3), y_shape=(10,), n_dataset_items=100):
+    def __init__(self, batch_size=8, x_shape=(360, 480, 3), y_shape=(1,), n_dataset_items=233):
         self.batch_size = batch_size
         self.x_shape = x_shape
         self.y_shape = y_shape
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
+        self.x_filepaths = os.listdir("./test/data/images")
+        self.y_labels = np.genfromtxt("./test/data/image_labels.txt")
         self.on_epoch_end()
         
         # DELETE THIS WHEN USING YOUR OWN DATASET, DO NOT STORE THE ACTUAL DATASET IN MEMEORY HERE
-        self.X_DATASET = [np.random.rand(*self.x_shape) for i in range(self.n_dataset_items)] 
-        self.Y_DATASET = [np.random.rand(*self.y_shape) for i in range(self.n_dataset_items)]
+        # self.X_DATASET = [np.random.rand(*self.x_shape) for i in range(self.n_dataset_items)] 
+        # self.Y_DATASET = [np.random.rand(*self.y_shape) for i in range(self.n_dataset_items)]
 
     def __len__(self):
         """Denotes the number of batches per epoch
