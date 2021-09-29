@@ -1,5 +1,6 @@
 import numpy as np
 from tensorflow.keras.utils import Sequence
+import os
 
 class DataGenerator(Sequence):
     '''this is a random data generator, edit this data generator to read data from dataset folder and return a batch with __getitem__'''
@@ -11,10 +12,9 @@ class DataGenerator(Sequence):
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
         self.on_epoch_end()
-        
-        # DELETE THIS WHEN USING YOUR OWN DATASET, DO NOT STORE THE ACTUAL DATASET IN MEMEORY HERE
-        self.X_DATASET = [np.random.rand(*self.x_shape) for i in range(self.n_dataset_items)] 
-        self.Y_DATASET = [np.random.rand(*self.y_shape) for i in range(self.n_dataset_items)]
+        data_path = r'../test/data/images'
+        for subdir, dirs, files in os.walk(data_path):
+            self.DATASET = files
 
     def __len__(self):
         """Denotes the number of batches per epoch
