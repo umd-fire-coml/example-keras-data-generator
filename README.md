@@ -1,4 +1,4 @@
-# Python Automated Testing Example
+# Keras Data Generator Example
 
 ![example workflow](https://github.com/umd-fire-coml/example-automated-tests/actions/workflows/run_all_tests.yaml/badge.svg)
 
