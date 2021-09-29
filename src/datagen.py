@@ -1,6 +1,7 @@
 import numpy as np
 from tensorflow.keras.utils import Sequence
 import os
+import cv2
 
 class DataGenerator(Sequence):
     '''this is a random data generator, edit this data generator to read data from dataset folder and return a batch with __getitem__'''
@@ -11,10 +12,9 @@ class DataGenerator(Sequence):
         self.y_shape = y_shape
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
+        self.x_filepaths = os.listdir('./test/data/images')
+        self.y_labels = np.genfromtxt('./test/data/image_labels.txt', dtype='int')
         self.on_epoch_end()
-        data_path = r'../test/data/images'
-        for subdir, dirs, files in os.walk(data_path):
-            self.DATASET = files
 
     def __len__(self):
         """Denotes the number of batches per epoch
@@ -36,8 +36,8 @@ class DataGenerator(Sequence):
 
         # Generate data
         for i in range(self.batch_size):
-            x_batch[i,] = self.X_DATASET[indexes[i]]
-            y_batch[i,] = self.Y_DATASET[indexes[i]]
+            x_batch[i,] = cv2.imread(self.x_filepaths[indexes[i]])
+            y_batch[i,] = self.y_labels[indexes[i]]
 
         # Return batch data
         return x_batch, y_batch
