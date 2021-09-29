@@ -1,11 +1,12 @@
 import numpy as np
-#import cv2
+import cv2
 from tensorflow.keras.utils import Sequence
+import os
 
 class DataGenerator(Sequence):
     '''this is a random data generator, edit this data generator to read data from dataset folder and return a batch with __getitem__'''
 
-    def __init__(self, batch_size=8, x_shape=(360, 480, 3), y_shape=(10,), n_dataset_items=233):
+    def __init__(self, batch_size=8, x_shape=(360, 480, 3), y_shape=(1,), n_dataset_items=233):
         self.batch_size = batch_size
         self.x_shape = x_shape
         self.y_shape = y_shape
