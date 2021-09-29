@@ -1,4 +1,6 @@
 import numpy as np
+import cv2
+Import os
 from tensorflow.keras.utils import Sequence
 
 class DataGenerator(Sequence):
@@ -10,11 +12,11 @@ class DataGenerator(Sequence):
         self.y_shape = y_shape
         self.n_dataset_items = n_dataset_items
         self.indexes = np.arange(self.n_dataset_items)
-        self.on_epoch_end()
-        
-        # DELETE THIS WHEN USING YOUR OWN DATASET, DO NOT STORE THE ACTUAL DATASET IN MEMEORY HERE
-        self.X_DATASET = [np.random.rand(*self.x_shape) for i in range(self.n_dataset_items)] 
-        self.Y_DATASET = [np.random.rand(*self.y_shape) for i in range(self.n_dataset_items)]
+   
+   
+        self.x_filepaths = os.listdir('./test/data/images')
+        self.y_labels = np.genfromtxt(./test/data/image_labels.txt', dtype='int')
+    	self.on_epoch_end()
 
     def __len__(self):
         """Denotes the number of batches per epoch
@@ -36,8 +38,8 @@ class DataGenerator(Sequence):
 
         # Generate data
         for i in range(self.batch_size):
-            x_batch[i,] = self.X_DATASET[indexes[i]]
-            y_batch[i,] = self.Y_DATASET[indexes[i]]
+            x_batch[i,] = cv2.imread(self.x_filepaths[indexes[i]])
+            y_batch[i,] = self.y_labels[indexes[i]]
 
         # Return batch data
         return x_batch, y_batch
