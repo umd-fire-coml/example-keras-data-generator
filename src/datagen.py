@@ -3,6 +3,7 @@ import cv2
 from tensorflow.keras.utils import Sequence
 import os
 
+
 class DataGenerator(Sequence):
     '''this is a random data generator, edit this data generator to read data from dataset folder and return a batch with __getitem__'''
 
